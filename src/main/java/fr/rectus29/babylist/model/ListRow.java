@@ -13,11 +13,9 @@ import java.util.UUID;
 @Setter
 @Accessors(chain = true, fluent = true)
 @Document("list_row")
-public class ListRow {
+public class ListRow extends GenericEntity{
 
 
-    @Id
-    private UUID id = UUID.randomUUID();
     private String label;
     private String link;
 

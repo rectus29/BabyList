@@ -25,12 +25,6 @@ spring:
       host: localhost
       port: 27017
 
-  datasource:
-    url: jdbc:h2:file:~/pci-mailNotificationListener-db
-    driverClassName:
-    username: sa
-    password:
-
 #actuator config
 management:
   endpoints:
