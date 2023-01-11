@@ -1,7 +1,7 @@
 server:
   port: 8029
   servlet:
-    context-path: /pci-mail-listener
+    context-path: /babylist
 
 springdoc:
   swagger-ui.path: /swagger-ui.html

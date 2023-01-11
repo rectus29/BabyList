@@ -30,8 +30,8 @@ public class BabyListApplication implements CommandLineRunner {
         listRowRepository.deleteAll();
 
         // save a couple of customers
-        listRowRepository.save(new ListRow().label("plop").link("https://google.fr"));
-        listRowRepository.save(new ListRow().label("plip").link("https://google.fr"));
+        listRowRepository.save(new ListRow().label("plop").addLink("https://google.fr"));
+        listRowRepository.save(new ListRow().label("plip").addLink("https://google.fr"));
 
         usersRepository.save(new User().name("name").firstName("firstName").email("email@domain.com"));
 
