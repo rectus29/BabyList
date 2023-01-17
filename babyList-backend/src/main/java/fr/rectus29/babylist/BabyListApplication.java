@@ -30,10 +30,16 @@ public class BabyListApplication implements CommandLineRunner {
         listRowRepository.deleteAll();
 
         // save a couple of customers
-        listRowRepository.save(new ListRow().label("plop").addLink("https://google.fr"));
-        listRowRepository.save(new ListRow().label("plip").addLink("https://google.fr"));
+        listRowRepository.save(new ListRow().setLabel("plop").addLink("https://google.fr"));
+        ListRow lr = listRowRepository.save(new ListRow().setLabel("plip").addLink("https://google.fr"));
 
-        usersRepository.save(new User().name("name").firstName("firstName").email("email@domain.com"));
+        User user = usersRepository.save(new User().setName("name").setFirstName("firstName").setEmail("email@domain.com"));
+        listRowRepository.save(lr.setUser(user));
+        lr.addLink("http://yolo.com");
+        listRowRepository.save(lr);
+
+        System.out.println(listRowRepository.findReservedListRow().size());
+
 
         // fetch all customers
         System.out.println("Customers found with findAll():");

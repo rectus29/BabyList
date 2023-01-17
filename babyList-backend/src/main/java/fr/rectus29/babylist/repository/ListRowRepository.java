@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface ListRowRepository extends MongoRepository<ListRow, UUID> {
@@ -12,7 +13,10 @@ public interface ListRowRepository extends MongoRepository<ListRow, UUID> {
 
     List<ListRow> findByLabel(String label);
 
-    @Query("{name:'?0'}")
-    ListRow findItemByName(String name);
+    @Query("{label:'?0'}")
+    Optional<ListRow> findItemByName(String name);
+
+    @Query("{user:{$ne:null}}")
+    List<ListRow> findReservedListRow();
 
 }
