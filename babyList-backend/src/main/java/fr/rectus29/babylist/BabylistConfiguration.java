@@ -38,11 +38,12 @@ public class BabylistConfiguration {
                 .authorizeHttpRequests((requests) -> {
                             requests
                                     .requestMatchers("/actuator/**", "/swagger-ui.html").permitAll()
-                                    .requestMatchers("/api/**").authenticated()
+                                    .requestMatchers("/api/**").permitAll()
                                     .anyRequest().authenticated();
                         }
                 )
                 .httpBasic();
+                ;
         return http.build();
     }
 
