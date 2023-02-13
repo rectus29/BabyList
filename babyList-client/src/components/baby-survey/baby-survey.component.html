@@ -1,5 +1,5 @@
 <div>
-  <form method="post" action="/api/V1/  survey">
+  <form (ngSubmit)="onSubmit()" #surveyForm="ngForm">
     <div class="mb-4">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ornare nec diam fermentum tincidunt. Maecenas vitae odio in lacus facilisis laoreet a in leo.
       Vivamus eu blandit odio. Vestibulum ut tincidunt ante. Praesent vel neque id nulla varius ultricies. Fusce tincidunt mauris urna, quis maximus mi pharetra eget.
@@ -12,7 +12,7 @@
       <h3>Qui êtes-vous ?</h3>
       <div class="mb-3">
         <label for="floatingInput" class="form-label">Nom Prénom</label>
-        <input type="text" class="form-control" id="name" placeholder="Nom prénom">
+        <input type="text" class="form-control" id="name" placeholder="Nom prénom" [(ngModel)]="survey.userName">
       </div>
       <div class="mb-3">
         <label for="floatingInput" class="form-label">Adresse e-mail</label>
@@ -23,23 +23,23 @@
       <h3>Qui sera t'il/elle ?</h3>
       <div class="mb-3">
         <label for="sexe" class="form-label">Sexe</label>
-        <select name="sexe" id="sexe" class="form-control">
+        <select name="sexe" id="sexe" class="form-control"  *ngFor="survey.sexe" [(ngModel)]="survey.sexe">
           <option value="man">Garçon</option>
           <option value="female">Fille</option>
         </select>
       </div>
       <div class="mb-3">
         <label for="sexe" class="form-label">Date de naissance</label>
-        <input type="date" class="form-control" id="dayOfBirth" placeholder="18/11/2023">
+        <input type="date" class="form-control" id="dayOfBirth" placeholder="18/11/2023" [(ngModel)]="survey.dateOfBirth">
       </div>
       <div class="mb-3">
         <label for="babyWeight" class="form-label">Poids à la naissance</label>
-        <input type="number" class="form-control" id="babyWeight" placeholder="6 kg">
+        <input type="number" class="form-control" id="babyWeight" placeholder="6 kg" [(ngModel)]="survey.weightOfBirth">
       </div>
 
       <div class="mb-3">
         <label for="babyFirstName" class="form-label">Prénom du monstre </label>
-        <input type="text" class="form-control" id="babyFirstName" placeholder="Gertrude">
+        <input type="text" class="form-control" id="babyFirstName" placeholder="Gertrude" [(ngModel)]="survey.childFirstName">
       </div>
     </div>
     <input type="submit" value="Sauvegarder" class="btn btn-primary">
