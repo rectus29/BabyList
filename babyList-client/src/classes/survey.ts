@@ -14,5 +14,6 @@ export class Survey {
 
 export enum Sexe {
   MASCULIN = 'Garçon',
-  FEMININ = 'Fille'
+  FEMININ = 'Fille',
+  BOTH = 'Les deux'
 }
