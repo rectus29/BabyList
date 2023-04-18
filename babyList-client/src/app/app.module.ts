@@ -6,18 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListRowListComponent } from '../components/list-row-list/list-row-list.component';
+import { BabySurveyComponent } from '../components/baby-survey/baby-survey.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListRowListComponent
+    ListRowListComponent,
+    BabySurveyComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

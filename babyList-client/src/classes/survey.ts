@@ -2,9 +2,9 @@ import {EnumValue} from "@angular/compiler-cli/src/ngtsc/partial_evaluator";
 
 export class Survey {
 
-  userName: string
-  userEmail: string
-  sexe: Sexe
+  userName: string | undefined
+  userEmail: string | undefined
+  sexe: Sexe | undefined
   dateOfBirth: Date | undefined
   weightOfBirth: number | undefined
   childFirstName: string | undefined
