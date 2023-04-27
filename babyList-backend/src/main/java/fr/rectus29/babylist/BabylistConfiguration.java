@@ -1,6 +1,19 @@
 package fr.rectus29.babylist;
 
-
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import org.bson.types.ObjectId;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
@@ -8,6 +21,7 @@ import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,8 +32,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.io.IOException;
 
 @Configuration
+@Import(JacksonAutoConfiguration.class)
 @ComponentScan(basePackages = "fr.rectus29")
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
@@ -54,6 +70,7 @@ public class BabylistConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .cors().disable()
                 .authorizeHttpRequests((requests) -> {
                             requests
                                     .requestMatchers("/actuator/**", "/swagger-ui.html").permitAll()
@@ -72,4 +89,18 @@ public class BabylistConfiguration {
     }
 
 
+    @Bean
+    public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
+        return builder -> builder.serializerByType(ObjectId.class, new JsonSerializer<ObjectId>() {
+            @Override
+            public void serialize(ObjectId value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+                gen.writeString(value.toHexString());
+            }
+        }).deserializerByType(ObjectId.class, new JsonDeserializer<ObjectId>() {
+            @Override
+            public ObjectId deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+                return new ObjectId(jsonParser.getValueAsString());
+            }
+        });
+    }
 }

@@ -11,35 +11,50 @@
     <div>
       <h3>Qui êtes-vous ?</h3>
       <div class="mb-3">
-        <label for="floatingInput" class="form-label">Nom Prénom</label>
-        <input type="text" class="form-control" id="name" placeholder="Nom prénom" ng-Model="survey.userName">
+        <label for="userName" class="form-label">Nom Prénom</label>
+        <input class="form-control" placeholder="Nom prénom" id="userName" name="userName" [(ngModel)]="survey.userName">
       </div>
       <div class="mb-3">
-        <label for="floatingInput" class="form-label">Adresse e-mail</label>
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="userEmail" class="form-label">Adresse e-mail</label>
+        <input type="email" class="form-control" id="userEmail" name="userEmail" [(ngModel)]="survey.userEmail" placeholder="name@example.com">
       </div>
     </div>
     <div>
       <h3>Qui sera t'il/elle ?</h3>
       <div class="mb-3">
         <label for="sexe" class="form-label">Sexe</label>
-        <select name="sexe" id="sexe" class="form-control"  *ngFor="survey.sexe" ng-Model="survey.sexe">
-          <option value="man">Garçon</option>
-          <option value="female">Fille</option>
+
+<!--        <ng-select-->
+<!--          [disabled]="!actionAllowed.updateUserProfile"-->
+<!--          class="bdk-ng-select bdk-ng-select&#45;&#45;fitContent dropdown-min-width-200"-->
+<!--          [(ngModel)]="profileDetails.id"-->
+<!--          [items]="profileList"-->
+<!--          name="profile"-->
+<!--          placeholder=""-->
+<!--          [searchable]="false"-->
+<!--          [clearable]="false"-->
+<!--          (change)="change()"-->
+<!--          [bindLabel]="'label'"-->
+<!--          [bindValue]="'id'"-->
+<!--          appendTo=".main-content"-->
+<!--        ></ng-select>-->
+
+        <select name="sexe" id="sexe" class="form-control" [(ngModel)]="survey.sexe">
+          <option *ngFor="let name of sexeList"  [ngValue]="survey.sexe">{{name}}</option>
         </select>
       </div>
       <div class="mb-3">
-        <label for="sexe" class="form-label">Date de naissance</label>
-        <input type="date" class="form-control" id="dayOfBirth" placeholder="18/11/2023" ng-Model="survey.dateOfBirth">
+        <label for="dateOfBirth" class="form-label">Date de naissance</label>
+        <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="18/11/2023" [(ngModel)]="survey.dateOfBirth">
       </div>
       <div class="mb-3">
         <label for="babyWeight" class="form-label">Poids à la naissance</label>
-        <input type="number" class="form-control" id="babyWeight" placeholder="6 kg" ng-Model="survey.weightOfBirth">
+        <input type="number" class="form-control" name="dateOfBirth" id="babyWeight" placeholder="6 kg" [(ngModel)]="survey.weightOfBirth">
       </div>
 
       <div class="mb-3">
         <label for="babyFirstName" class="form-label">Prénom du monstre </label>
-        <input type="text" class="form-control" id="babyFirstName" placeholder="Gertrude" ng-Model="survey.childFirstName">
+        <input type="text" class="form-control" name="babyFirstName"  id="babyFirstName" placeholder="Gertrude" [(ngModel)]="survey.childFirstName">
       </div>
     </div>
     <input type="submit" value="Sauvegarder" class="btn btn-primary">

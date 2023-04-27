@@ -2,6 +2,7 @@ package fr.rectus29.babylist.model;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -13,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @Document("list_row")
 public class ListRow extends GenericEntity{

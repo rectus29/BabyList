@@ -6,12 +6,17 @@ import fr.rectus29.babylist.repository.SurveyRepository;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class SurveyService {
 
-    private SurveyRepository surveyRepository;
+    private final SurveyRepository surveyRepository;
+
+    public SurveyService(SurveyRepository surveyRepository) {
+        this.surveyRepository = surveyRepository;
+    }
 
     public Optional<SurveyAnswer> findOptionalById(ObjectId objectId) {
         return this.surveyRepository.findById(objectId);
@@ -27,5 +32,9 @@ public class SurveyService {
                 .setWeightOfBirth(surveyCommand.getWeightOfBirth());
         sa = this.surveyRepository.save(sa);
         return sa;
+    }
+
+    public List<SurveyAnswer> findAll() {
+        return this.surveyRepository.findAll();
     }
 }
